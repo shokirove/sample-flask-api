@@ -1,0 +1,36 @@
+pip install:
+    Flask
+    Flask-RESTful
+    Flask-JWT
+
+from flask import Flask, request
+    request
+        methods: get_json
+            force=True (no error if content-type <> application/json)
+            silent=True (just return None if content-type <> application/json)
+
+    from flask_restful import Resource, Api, RequestParser
+        Resource
+            create classes that extend Resource
+            override methods get,post,put,delete..
+        Api
+            add_resource
+
+        reqparse
+            add_argument() - add arguments you expect in request
+            parse_args() - parse arguments
+
+
+    from flask_jwt import JWT, jwt_required
+        implement required methods:
+            authenticate(username, password): check and return the user if one exist in db
+            identity(payload): check and return user if jwt payload['identity'] exist in users db
+        add @jwt_required anotation to methods that require authentication
+
+    
+Return Codes:
+200 - ok
+400 - bad request
+404 - not found
+201 - created
+202 - accepted ( accepted but creation delayed)
